@@ -1,47 +1,60 @@
 const _ = require('./underbar');
 
 const first = function(str, n) {
-  // Your code goes here
+  return _.first(str.split(''), n).join('');
 };
 
 const last = function(str, n) {
-  // Your code goes here
+  return _.last(str.split('').join(''), n);
 };
 
 const removeChar = function(str, target) {
-  // hint: use _.reject
-  // Your code goes here
+  return _.reject(str.split(''), (element)=>{return element === target}).join('');
 };
 
 const hasChar = function(str, target) {
-  // hint: use _.some
-  // Your code goes here
+  return _.some(str.split('').join(''), (element)=>{return element === target});
 };
 
 const isOnlyDigits = function(str) {
-  // Your code goes here
+  return _.every(str.split(''), (element)=>{return !isNaN(element)});
 };
 
 const filterToOnlyDigits = function(str) {
-  // Your code goes here
+  return _.filter(str.split(''), (element)=>{return !isNaN(element)}).join('').trim();
 };
 
 const truncateString = function(val, maxLength) {
-  // A freebie solution, this is the ONLY method here that doesn't use Underbar.
   return String(val).slice(0, maxLength);
 };
 
 const truncateLongItems = function(obj, maxLength) {
-  // hint: use truncateString above
-  // Your code goes here
+  return _.map(obj, (element, key, obj)=>{
+    return truncateString(element, maxLength);
+  })
 };
 
 const countChars = function(str) {
-  // Your code goes here
+  returnObject = {};
+  _.each(str.split(''), (letter)=>{
+    returnObject[letter] = null;
+  });
+  for(let key in returnObject) {
+    returnObject[key] =  _.filter(str.split(''), (letter2)=>{
+      return key === letter2;
+    }).length;
+  }
+  return returnObject;
 };
 
 const dedup = function(str) {
-  // Your code goes here
+  const letterCount = countChars(str);
+  const returnArray = [];
+  for(let key in letterCount) {
+    returnArray.push(key);
+    delete letterCount[key]; 
+  }
+  return returnArray.join('');
 };
 
 module.exports = {
